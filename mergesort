@@ -1,0 +1,57 @@
+class Solution {
+    
+    
+    
+    public static void Mergsort(int[] nums1, int start, int end) 
+	{ 
+		if(end-start < 2) 
+		{ 
+			return; 
+		} 
+	   int mid = (start+end)/2; 
+	   Mergsort(nums1,start,mid); 
+	   Mergsort(nums1,mid,end); 
+	   merge1(nums1, start, mid, end); 
+	    
+	} 
+private static void merge1(int[] nums1, int start, int mid, int end) 
+{ 
+		// TODO Auto-generated method stub 
+	if(nums1[mid-1]<= nums1[mid]) 
+	{ 
+		return; 
+	} 
+	int i = start; 
+    int j = mid; 
+    int tempindex = 0; 
+    int[] temp = new int[end-start]; 
+    while(i<mid && j< end ) 
+    { 
+    	temp[tempindex++] = nums1[i]<= nums1[j] ? nums1[i++] : nums1[j++]; 
+    } 
+     
+    System.arraycopy(nums1, i, nums1, start+tempindex, mid-i);//merging the partition we copy the values back to the array,,  
+	System.arraycopy(temp, 0, nums1, start, tempindex);	 
+} 
+    
+    
+    
+    
+    public int[] merge(int[] nums1, int m, int[] nums2, int n) 
+    {
+        int j =0;
+      for(int i = m; i<m+n ; i++)
+      {
+          if(nums1[i] == 0)
+          {
+              nums1[i] = nums2[j];
+              j++;
+          }
+          
+      }
+        Mergsort(nums1, 0, nums1.length );
+        
+        return nums1;
+    
+    }
+}
